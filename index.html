@@ -54,7 +54,7 @@
 
                 <div class="notify-bell">
 
-                    <button type="button" class="bell-btn" aria-expanded="false" aria-controls="alert-container" aria-label="Notification alert" onclick="toggleButon()">
+                    <button type="button" class="bell-btn" aria-expanded="false" aria-controls="alert-container" aria-label="Notification alert">
 
                         <svg class="bell" width="41" height="40" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M7.75203 14.4239L5.3061 14.1427C3.45144 13.9295 2.92542 11.4844 4.52838 10.5274L4.5933 10.4886C5.466 9.96761 6.00045 9.02609 6.00045 8.00969V7.5C6.00045 5.01472 8.01517 3 10.5005 3C12.9857 3 15.0005 5.01472 15.0005 7.5V8.00969C15.0005 9.02609 15.5349 9.96761 16.4076 10.4886L16.4725 10.5274C18.0755 11.4844 17.5495 13.9295 15.6948 14.1427L13.152 14.435V14.8C13.152 16.2912 11.9432 17.5 10.452 17.5C8.96086 17.5 7.75203 16.2912 7.75203 14.8V14.4239ZM11.652 14.5H9.25203V14.8C9.25203 15.4627 9.78929 16 10.452 16C11.1148 16 11.652 15.4627 11.652 14.8V14.5ZM8.50045 13H12.5005L15.5235 12.6525C15.953 12.6032 16.0748 12.0369 15.7036 11.8153L15.6387 11.7766C15.5591 11.7291 15.4815 11.6793 15.4057 11.6273C15.2506 11.521 15.1036 11.4055 14.9651 11.2818C14.9405 11.2598 14.9162 11.2377 14.8922 11.2152C14.0144 10.395 13.5005 9.23833 13.5005 8.00969V7.5C13.5005 5.84315 12.1573 4.5 10.5005 4.5C8.8436 4.5 7.50045 5.84315 7.50045 7.5V8.00969C7.50045 9.23833 6.98651 10.395 6.10871 11.2152C6.08469 11.2377 6.06039 11.2598 6.03583 11.2818C5.89734 11.4055 5.75029 11.521 5.59523 11.6273C5.51945 11.6793 5.44176 11.7291 5.36222 11.7766L5.29729 11.8153C4.9261 12.0369 5.0479 12.6032 5.47739 12.6525L8.50045 13Z" fill="#fff"/>
@@ -71,7 +71,7 @@
 
                             <div class="alert-icons">
 
-                                <button type="button">
+                                <button type="button" role="menu-items">
                                     <svg id="hamburger" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                         <path d="M3 6C3 5.58579 3.33579 5.25 3.75 5.25H16.25C16.6642 5.25 17 5.58579 17 6C17 6.41421 16.6642 6.75 16.25 6.75H3.75C3.33579 6.75 3 6.41421 3 6Z" fill="#fff"/>
                                         <path d="M6.75 14C6.75 13.5858 7.08579 13.25 7.5 13.25H12.5C12.9142 13.25 13.25 13.5858 13.25 14C13.25 14.4142 12.9142 14.75 12.5 14.75H7.5C7.08579 14.75 6.75 14.4142 6.75 14Z" fill="#fff"/>
@@ -79,7 +79,7 @@
                                       </svg>
                                 </button>
 
-                                <button type="button">
+                                <button type="button" role="menu-items">
                                     <svg class="thicked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                         <path d="M13.2803 9.03033C13.5732 8.73744 13.5732 8.26256 13.2803 7.96967C12.9874 7.67678 12.5126 7.67678 12.2197 7.96967L9.25 10.9393L8.03033 9.71967C7.73744 9.42678 7.26256 9.42678 6.96967 9.71967C6.67678 10.0126 6.67678 10.4874 6.96967 10.7803L8.71967 12.5303C9.01256 12.8232 9.48744 12.8232 9.78033 12.5303L13.2803 9.03033Z" fill="#fff"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10ZM15.5 10C15.5 13.0376 13.0376 15.5 10 15.5C6.96243 15.5 4.5 13.0376 4.5 10C4.5 6.96243 6.96243 4.5 10 4.5C13.0376 4.5 15.5 6.96243 15.5 10Z" fill="#fff"/>
@@ -97,11 +97,11 @@
 
         <!-- davii collections  -->
 
-                <div class="img-container" onclick="toggleContainer()" tabindex="0" aria-expanded="false" aria-controls="userInfo" aria-label="Davii Collection  Popup">
+                <div id="menu-trigger" class="img-container" tabindex="0" aria-expanded="false" aria-controls="userInfo" aria-haspopup="true">
                     <p>
                         Davii Collections
                     </p>
-                    <button aria-expanded="false" aria-controls="userInfo" aria-label="Davii Collection  Popup" type="button" onclick="toggleContainer()">
+                    <button>
                         <h1>
                             DC
                         </h1>
@@ -118,7 +118,7 @@
                             DC
                             </div>
                             <h2>
-                                Davil Collections
+                                Davii Collections
                             </h2>
                             
                         </div>
@@ -134,7 +134,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="store">
+                    <div class="store" tabindex="0" role="menu-items">
                         <div>
 
                             <svg width="41" height="40" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -143,35 +143,36 @@
 
                         </div>
                         <li>
-                            All stores
+                            <a href="https://admin.shopify.com">All stores</a>
                         </li>  
                     </div> 
                     <hr>
                     <ul class="store-links">
 
-                        <a href="https://admin.shopify.com" target="_blank"><li>Help Center</li>
-                            <li>Changelog</li>
-                            <li>Community forums</li>
-                            <li>Hire a Shopify Partner</li>
-                            <li>Keyboard shortcuts</li>
+                        <a href="https://admin.shopify.com" target="_blank" tabindex="0">
+                            <li role="menu-items" tabindex="0">Help Center</li>
+                            <li role="menu-items" tabindex="0">Changelog</li>
+                            <li role="menu-items" tabindex="0">Community forums</li>
+                            <li role="menu-items" tabindex="0">Hire a Shopify Partner</li>
+                            <li role="menu-items" tabindex="0">Keyboard shortcuts</li>
                         </a>
 
                     </ul>  
                     <hr>
                     <div class="store-items">
                         <a href="https://admin.shopify.com">
-                            <div class="name">
+                            <div class="name" role="menu-items" tabindex="0">
                                 David Micheal
                                 <p>
                                     davidmicheal@gmail.com
                                 </p>
                             </div>
-                            <p id="mg-acct">
+                            <p id="mg-acct" role="menu-items" tabindex="0">
                                 Manage account
                             </p>
-                            <p id="logout">
+                            <span><p id="logout" role="menu-items" tabindex="0">
                                 Log out
-                            </p>
+                            </p></span>
                         </a>
                     </div>           
                 </div>             
@@ -259,14 +260,14 @@
                     </button>
                 </div>
             </div>
-
+            <div class="article-generalContainer">
             <!-- checkbox content container  -->
             <article>
                 <!-- first content container  -->
 
                 <div class="article-container" tabindex="0" role="article container" id="container-button" aria-labelledby="check box items">             
                     <div class="gcontainer">
-                        <div class="setup-container" tabindex="0">
+                        <div class="setup-container" tabindex="0" role="container-item">
                             <div class="checkBox">
 
                                 <input class="customize-theme" type="checkbox" name="customize-theme" id="customize-theme">
@@ -305,7 +306,7 @@
                                 </button>
                             </div> 
 
-                            <h4 class="article-heading" role="container item">
+                            <h4 class="article-heading">
                                 Customize your online store
                             </h4>
                         </div>
@@ -340,7 +341,7 @@
                 <div class="article-container" tabindex="0" role="article container" id="check box items">
                     
                     <div class="gcontainer">
-                        <div class="setup-container" tabindex="0">
+                        <div class="setup-container" tabindex="0" role="container-item">
                             <div class="checkBox">
 
                                 <input class="customize-theme" type="checkbox" name="customize-theme" id="customize-theme">
@@ -374,7 +375,7 @@
                                     </svg>
                                 </div>
                             </div>  
-                               <h4 class="article-heading" role="container item">
+                               <h4 class="article-heading">
                                 
                                 Add your first product
 
@@ -411,7 +412,7 @@
             <article>
                 <div class="article-container" tabindex="0">                  
                     <div class="gcontainer">
-                        <div class="setup-container" tabindex="0">
+                        <div class="setup-container" tabindex="0" role="container-item">
                             <div class="checkBox">
 
                                 <input class="customize-theme" type="checkbox" name="customize-theme" id="customize-theme">
@@ -446,7 +447,7 @@
                                         </svg>
                                     </div>
                             </div>  
-                               <h4 class="article-heading" role="container item">Add a custom domain</h4>
+                               <h4 class="article-heading">Add a custom domain</h4>
                         </div>
                             <div class="article-flex-container">
                                 <div class="article-content">
@@ -478,7 +479,7 @@
             <article>
                 <div class="article-container" tabindex="0">                  
                     <div class="gcontainer">
-                        <div class="setup-container" tabindex="0">
+                        <div class="setup-container" tabindex="0" role="container-item">
                             <div class="checkBox">
 
                                 <input class="customize-theme" type="checkbox" name="customize-theme" id="customize-theme">
@@ -515,7 +516,7 @@
 
                                 </div>
                             </div>  
-                               <h4 class="article-heading" role="container item">
+                               <h4 class="article-heading">
                                 
                                     Name your store
                             
@@ -551,7 +552,7 @@
             <article>
                 <div class="article-container" tabindex="-1">             
                     <div class="gcontainer">
-                        <div class="setup-container" tabindex="0">
+                        <div class="setup-container" tabindex="0" role="container-item">
                             <div class="checkBox">
 
                                 <input class="customize-theme" type="checkbox" name="customize-theme">
@@ -587,7 +588,7 @@
                                 </div>
                             </div>
  
-                                <h4 class="article-heading" role="container item">
+                                <h4 class="article-heading">
                                         
                                     Set up a payment provider
 
@@ -616,6 +617,7 @@
                     </div>
                 </div>
             </article>
+            </div>
         </div>      
     </section>
     <script src="/app.js"></script>

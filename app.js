@@ -2,51 +2,152 @@
 
 const notifyBell = document.querySelector(".bell-btn");
 const notifyBellMenu = document.querySelector(".alert-container");
+const allNotifyBellMenuItems = notifyBellMenu.querySelectorAll(
+  '[role="menu-items"]'
+);
+console.log(allNotifyBellMenuItems);
 
-notifyBell.addEventListener("click", function () {
+notifyBell.addEventListener("click", toggleButon);
+
+function toggleButon() {
   notifyBellMenu.classList.toggle("showAlert");
-});
 
-function toggleButon(){
+  const isExpanded = notifyBell.attributes["aria-expanded"].value === "true";
 
-  const expanded = notifyBellMenu.getAttribute("aria-expanded") === "true";
-      notifyBellMenu.hidden = !notifyBellMenu.hidden;
-      notifyBellMenu.setAttribute("aria-expanded", String(!expanded));
+  if (isExpanded) {
+    closeBtn();
+  } else {
+    openBtn();
+  }
 }
-// set event listener to store topbar menu
+
+function handleNotifyArrowKeyPress(event, notifyItemIndex) {
+  const lastNotifyItem = notifyItemIndex === allNotifyBellMenuItems.length - 1;
+  const firstNotifyItem = notifyItemIndex === 0;
+
+  const nextNotifyItem = allNotifyBellMenuItems.item(notifyItemIndex + 1);
+  const previusNotifyItem = allNotifyBellMenuItems.item(notifyItemIndex - 1);
+
+  if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+    if (lastNotifyItem) {
+      allNotifyBellMenuItems.item(0).focus();
+
+      return;
+    }
+    nextNotifyItem.focus();
+  }
+
+  if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+    if (firstNotifyItem) {
+      allNotifyBellMenuItems.item(allNotifyBellMenuItems.length - 1).focus();
+
+      return;
+    }
+    previusNotifyItem.focus();
+  }
+}
+
+function openBtn() {
+  notifyBell.isExpanded === "true";
+  allNotifyBellMenuItems.item(0).focus();
+
+  notifyBellMenu.addEventListener("keyup", handleNotifyEscapeKeyPress);
+
+  allNotifyBellMenuItems.forEach(function (notifyItem, notifyItemIndex) {
+    notifyItem.addEventListener("keyup", function (event) {
+      handleNotifyArrowKeyPress(event, notifyItemIndex);
+    });
+  });
+}
+
+function handleNotifyEscapeKeyPress(event) {
+  if (event.key === "Escape") {
+    toggleButon();
+  }
+}
+
+function closeBtn() {
+  notifyBell.isExpanded === "false";
+  notifyBell.focus();
+}
+
+// // set event listener to store topbar menu
 
 const dctopBar = document.querySelector(".img-container");
 const topBarMenu = document.querySelector(".userInfo");
-const topBarItems = Array.from(topBarMenu.children);
-let active = -1;
 
-dctopBar.addEventListener("click", function () {
-  topBarMenu.classList.toggle("showInfo");
-});
+const allMenuItems = topBarMenu.querySelectorAll('[role="menu-items"]');
 
-// code for keyboard accessiblity
-document.addEventListener("keydown", function (e) {
-  // console.log(e.key);
-  if (e.key === "ArrowDown") {
-    if (active < topBarItems.length - 1) {
-      active++;
-      topBarItems[active].focus();
+dctopBar.addEventListener("click", toggleMenu);
+
+//listening to arrow key press
+
+function handleArrowKeyPress(event, menuItemIndex) {
+  const lastMenuItem = menuItemIndex === allMenuItems.length - 1;
+  const firstMenuItem = menuItemIndex === 0;
+
+  const nextMenuItem = allMenuItems.item(menuItemIndex + 1);
+  const previousMenuItem = allMenuItems.item(menuItemIndex - 1);
+
+  if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+    if (lastMenuItem) {
+      allMenuItems.item(0).focus();
+
+      return;
     }
-  } else if (e.key === "ArrowUp") {
-    if (active < topBarItems.length - 1) {
-      active--;
-      topBarItems[active].focus();
-    }
-    // topBarItems[active].focus();
+    nextMenuItem.focus();
   }
-});
-// topBarItems.forEach(function (item) {
-//   item.addEventListener("click", function () {
-//     topBarMenu.classList.remove("showInfo");
-//   });
-// });
 
-// function screen recorder accessiblity
+  if (event.key == "ArrowLeft" || event.key == "ArrowUp") {
+    if (firstMenuItem) {
+      allMenuItems.item(allMenuItems.length - 1).focus();
+
+      return;
+    }
+    previousMenuItem.focus();
+  }
+}
+
+function openMenu() {
+  dctopBar.ariaExpanded = "true";
+
+  allMenuItems.item(0).focus();
+
+  // listening to escape key if opened
+
+  topBarMenu.addEventListener("keyup", handleEscapeKeyPress);
+
+  allMenuItems.forEach(function (menuItem, menuItemIndex) {
+    menuItem.addEventListener("keyup", function (event) {
+      handleArrowKeyPress(event, menuItemIndex);
+    });
+  });
+}
+
+//function to key up listening
+
+function handleEscapeKeyPress(event) {
+  if (event.key === "Escape") {
+    toggleMenu();
+  }
+}
+
+function closeMenu() {
+  dctopBar.ariaExpanded = "false";
+  dctopBar.focus();
+}
+
+function toggleMenu() {
+  const isExpanded = dctopBar.attributes["aria-expanded"].value === "true";
+
+  topBarMenu.classList.toggle("showInfo");
+
+  if (isExpanded) {
+    closeMenu();
+  } else {
+    openMenu();
+  }
+}
 
 // set event listener to modal popup
 
@@ -68,6 +169,44 @@ modalToggle.addEventListener("click", () => {
   const trialPopupModal = document.querySelector(".popup-modal");
   trialPopupModal.style.display = "none";
 });
+
+function handleArticleArrowKeyPress(event, articleItemIndex) {
+  const articlesGeneral_Container = document.querySelectorAll(
+    ".article-generalContainer"
+  );
+  const allArticleHeadingItems = articlesGeneral_Container.querySelectorAll(
+    '[role="container-item"]'
+  );
+
+  const lastArticleItem =
+    articleItemIndex === allArticleHeadingItems.length - 1;
+  const firstArticleItem = articleItemIndex === 0;
+
+  const nextArticleItem = articleItemIndex.item(
+    allArticleHeadingItems.length + 1
+  );
+  const previousArticleItem = allArticleHeadingItems.item(
+    allArticleHeadingItems.length - 1
+  );
+
+  if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+    if (lastArticleItem) {
+      allArticleHeadingItems.item(0).focus();
+
+      return;
+    }
+    nextArticleItem.focus();
+  }
+
+  if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+    if (firstArticleItem) {
+      allArticleHeadingItems.item(allArticleHeadingItems.length - 1).focus();
+
+      return;
+    }
+    previousArticleItem.focus();
+  }
+}
 
 // close guide
 
@@ -98,7 +237,14 @@ closeGuide.addEventListener("click", function () {
       isExpanded === "true";
     }
   });
+
+  closeGuide.addEventListener("keyup", function(event){
+    handleArticleArrowKeyPress(event, articleItemIndex)
+
+  })
 });
+
+
 
 document.addEventListener("keydown", function (e) {
   console.log(e.key);
@@ -118,6 +264,7 @@ document.addEventListener("keydown", function (e) {
     }
   }
 });
+
 // open guide
 
 // const storeContainer = document.querySelector(".store-wrapper");
@@ -133,12 +280,13 @@ openGuide.addEventListener("click", () => {
 
 document.addEventListener("keydown", function (event) {
   const articles = document.querySelectorAll(".article-container");
+  const customize_theme = document.querySelector(".customize-theme");
 
   let currentIndex = 0;
 
   function keypress(event) {
     if (event.key === "enter") {
-      const checkbox = articles[currentIndex].querySelector(".customize-theme");
+      const checkbox = articles[currentIndex].customize_theme;
       checkbox.checked = !checkbox.checked;
     } else if (event.key === "ArrowUp" && currentIndex > 0) {
       currentIndex--;
@@ -293,3 +441,39 @@ articleContainer.forEach(function (article) {
     });
   });
 });
+
+// import React from "react";
+// import ReactDOM from "react-dom";
+
+// const roolElement = document.getElementById("root");
+
+// let counter = 0;
+// const handleClickEvent = () =>{
+//   counter++;
+//   console.log("counter", counter)
+//   renderContent();
+// };
+
+// const content = () =>{
+//   <div>
+//     <button onClick={counter}>Clish to increase the number</button>
+//     <p>The counter is on {counter}</p>
+//   </div>
+
+// };
+
+// ReactDOM.render(content, roolElement);
+
+// const renderContent = () =>{
+//   const content = () =>{
+//     <div>
+//       <button onClick={counter}>Clish to increase the number</button>
+//       <p>The counter is on {counter}</p>
+//     </div>
+
+//   };
+
+//   ReactDOM.render(content, roolElement);
+
+// }
+// renderContent()

@@ -47,6 +47,11 @@ body{
 
 }
 
+:focus{
+    outline: 2px solid #005BD3;
+    outline-offset: 1;
+    border-radius: 8px;
+}
 /* logo display mobile  */
 
 #logo-mobile{
@@ -75,6 +80,7 @@ hr{
 
     border: 0.75px solid var(--stroke-Light);
     width: 320px;
+    margin: 3px 0 5px 0;
 
 }
 
@@ -114,7 +120,7 @@ header{
     font-size: var(--text-size);
     font-weight: var(--medium);
     line-height: 18.2px;
-    width: 238px;
+    width: 206px;
     height: 32px;
     border-radius: 8px;
     background: var(--dark-Gray);
@@ -218,7 +224,7 @@ header{
 .notify-icon .alert-container{
 
     background: var(--white);
-    width: 358px;
+    width: 315px;
     height: 118px;
     position: absolute;
     right: 0;
@@ -241,7 +247,7 @@ header{
 
 .notify-icon .alert{
 
-    width: 351px;
+    width: 323px;
     height: 20px;
     margin: 0 auto;
     display: flex;
@@ -311,7 +317,7 @@ header{
 
 .notify-icon .alert-content{
 
-    width: 351px;
+    width: 324px;
     height: 50px;
     margin: 0 auto;
     display: flex;
@@ -360,20 +366,13 @@ header{
 
 }
 
-.notify-icon .img-container button:focus{
-
-    outline: 2px solid #005BD3;
-    outline-offset: 1px;
-
-}
-
 /* info popup  */
 
 header .userInfo {
 
    background: var(--white);
     width: 320px;
-    height: 384px;
+    height: 386px;
     position: absolute;
     right: 0;
     top: 64px;
@@ -384,13 +383,6 @@ header .userInfo {
     margin-right: 10px;
     display: none;
     box-shadow: 0px 4px 8px 0px #0000000D;
-
-}
-
-header .userInfo:focus{
-
-    border: 2px solid #005BD3;
-    border-radius: 8px;
 
 }
 
@@ -464,9 +456,11 @@ header .userInfo .store{
 
     width: 308px;
     height: 32px;
+    margin-top: 5px;
     display: flex;
     align-items: center;
     gap: 8px;
+    transition: all 0.2s ease-in;
 
 }
 
@@ -483,16 +477,32 @@ header .store svg path{
 
 }
 
-header .userInfo .store li{
+header .userInfo .store li {
 
     width: 75px;
     height: 18px;
     list-style-type: none;
+    line-height: 18.2px;
+
+
+}
+
+header .userInfo .store li a{
+
+    text-decoration: none;
     font-weight: var(--regular);
     font-size: var(--text-size);
     color: var(--dark-Gray);
-    line-height: 18.2px;
 
+}
+
+header .userInfo .store:hover{
+    border: 2px solid #005BD3;
+    border-radius: 8px;
+    padding-left: 2px;
+}
+header .userInfo .store:focus{
+    padding-left: 5px;
 }
 
 header .userInfo .store-links{
@@ -504,19 +514,28 @@ header .userInfo .store-links{
 
 }
 
-header .userInfo .store-links li:hover{
 
-    border: 2px solid #005BD3;
-    border-radius: 8px;
-
-}
 
 header .userInfo .store-links li{
-
+    
     list-style-type: none;
     font-weight: var(--regular);
     font-size: var(--text-size);
     transition: all 0.2s ease-in;
+    
+}
+
+header .userInfo .store-links li:hover{
+
+    outline: 2px solid #005BD3;
+    border-radius: 8px;
+    padding-left: 2px;
+
+}
+
+header .userInfo .store-links li:focus{
+
+    padding-left: 5px;
 
 }
 
@@ -526,7 +545,6 @@ header .userInfo .store-links a{
     color: var(--dark-Gray);
 
 }
-
 
 header .userInfo .store-items {
 
@@ -541,14 +559,16 @@ header .userInfo .store-items a{
 
 }
 
+
 header .userInfo .name{
 
     font-weight: var(--medium);
     font-size: var(--text-size);
     color: var(--dark-Gray);
-    padding: 0.66rem 0 1rem 0;
+    padding: 2px 0;
+    margin-bottom: 6px;
     line-height: 18.2px;
-  
+    transition: all 0.2s ease-in;
 }
 
 header .userInfo .name p{
@@ -557,8 +577,15 @@ header .userInfo .name p{
     font-size: var(--font-Size);
     color: var(--grayish);
     line-height: 15.6px;
-    transition: all 0.2s ease-in;
 
+}
+
+header .userInfo .name:focus{
+    padding-left: 2px;
+}
+
+header .userInfo .name p:hover{
+    padding-left: 2px;
 }
 
 header .userInfo .store-items p{
@@ -566,7 +593,7 @@ header .userInfo .store-items p{
     font-weight: var(--regular);
     font-size: var(--text-size);
     color: var(--dark-Gray);
-    transition: all 0.2s ease-in;
+    transition: all 0.1s ease;
 
 }
 
@@ -583,6 +610,24 @@ header .userInfo .store-items #mg-acct, #logout{
     color: var(--dark-Gray);
     padding: 6px 0px 6px 0px;
 
+}
+
+header .userInfo .store-items #mg-acct:hover{
+    border: 2px solid #005BD3;
+    border-radius: 8px;
+    padding-left: 2px;
+}
+
+header .userInfo .store-items #mg-acct:focus{
+    padding-left: 2px;
+}
+
+header .userInfo .store-items #logout:hover{
+    padding-left: 2px; 
+}
+
+header .userInfo .store-items #logout:focus{
+    padding-left: 2px;
 }
 
 /* section container styling  */
@@ -800,6 +845,9 @@ section .store-wrapper .setup-icon svg path{
 
     display: none;
 
+}
+.rotate{
+    transform: rotate(180deg);
 }
 
 .checkbox{
@@ -1070,6 +1118,7 @@ article .article-container{
     }
 }
 
+
 /* desktop view  */
 
 @media (min-width: 850px) {
@@ -1132,7 +1181,7 @@ article .article-container{
   }
     .notify-icon .alert-container{
 
-        width: 383px;
+        width: 355px; 
 
   }
     .notify-icon .img-container{
@@ -1158,12 +1207,6 @@ article .article-container{
     .notify-icon .img-container:active{
 
         background: var(--gray-Gray);
-
-  }
-    .notify-icon .img-container:focus{
-
-        background: var(--gray-Gray);
-        border: 2px solid #005BD3;
 
   }
 
