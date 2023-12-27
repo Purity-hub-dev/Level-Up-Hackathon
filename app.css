@@ -788,6 +788,7 @@ section .store-wrapper .article-header .range-progress p{
     line-height: 15.2px;
     color: var(--dark-Gray);
 
+
 }
 
 section .store-wrapper .article-header .range-progress .progress-bar{
@@ -857,13 +858,17 @@ section .store-wrapper .setup-icon svg path{
 
 }
 
+
 /* article container styling  */
 
 article .article-container{
 
-    padding: 8px 8px 12px 8px;
-    display: none;
+    padding: 8px 8px 12px 8px;    
 
+}
+
+.hide{
+    display: none;
 }
 
 .article-container.containerBg{
@@ -899,7 +904,7 @@ article .article-container{
 
     outline: none;
     width: 24px;
-    height: 24px;
+    height: 0px;
     position: absolute;
     top: 0;
     left: 0;
@@ -908,7 +913,17 @@ article .article-container{
 
 }
 
-.checkBox .second-svg, .third-svg{
+/* .checkBox .second-svg, .third-svg{
+
+    display: none;
+
+} */
+.hidden{
+
+    display: none;
+
+}
+.checkbox-btn.hidden{
 
     display: none;
 
@@ -933,6 +948,9 @@ article .article-container{
 
     border: none;
     background: none;
+    cursor: pointer;
+    padding: 4px;
+    /* background-color: red; */
 
 }
 
@@ -940,6 +958,13 @@ article .article-container{
 
     width: 20px;
     height: 20px;
+
+        animation-name: rotate-svg;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
+    
 
 }
 
@@ -1077,14 +1102,6 @@ article .article-container{
 
 /* check box animation  */
 
-.rotate-second-svg{
-
-    animation-name: rotate-svg;
-    animation-duration: 1s;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
-
-}
 
 @keyframes rotate-svg{
 

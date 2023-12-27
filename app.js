@@ -5,7 +5,6 @@ const notifyBellMenu = document.querySelector(".alert-container");
 const allNotifyBellMenuItems = notifyBellMenu.querySelectorAll(
   '[role="menu-items"]'
 );
-console.log(allNotifyBellMenuItems);
 
 notifyBell.addEventListener("click", toggleButon);
 
@@ -213,201 +212,163 @@ function handleArticleArrowKeyPress(event, articleItemIndex) {
 const closeGuide = document.querySelector("button .close-guide");
 const openGuide = document.querySelector("button .open-guide");
 
-let result = -1;
+const setUpBtn = document.querySelector("#container-button");
+const articleGeneralContainer = document.querySelector(
+  ".article-generalContainer"
+);
 
-let isExpanded = closeGuide.getAttribute["aria-expanded"];
+setUpBtn.addEventListener("click", toggleOpen);
 
-closeGuide.addEventListener("click", function () {
-  const articles = document.querySelectorAll(".article-container");
-  // console.log(articles);
-  articles.forEach(function (article) {
-    closeGuide.classList.add("invisible");
-    openGuide.classList.remove("invisible");
-    article.style.display = "block";
+function toggleOpen() {
+  const isExpanded = setUpBtn.attributes["aria-expanded"].value === "true";
 
-    if (isExpanded === "true") {
-      // closeGuide.ariaExpanded = "false"
-      closeGuide.setAttribute("aria-expanded", "false");
-      isExpanded === "true";
-
-      console.log(closeGuide.setAttribute);
-    } else {
-      // closeGuide.ariaExpanded = "true";
-      closeGuide.setAttribute("aria-expanded", "true");
-      isExpanded === "true";
-    }
-  });
-
-  closeGuide.addEventListener("keyup", function(event){
-    handleArticleArrowKeyPress(event, articleItemIndex)
-
-  })
-});
-
-
-
-document.addEventListener("keydown", function (e) {
-  console.log(e.key);
-
-  const articleContainer = document.querySelector(".article-container");
-  const articleContainerMenu = articleContainer.children;
-  if (e.key === "ArrowDown") {
-    if (result < articleContainerMenu.length - 1) {
-      result++;
-      articleContainerMenu[result].focus();
-      // articleContainerMenu[result].scrollIntoView
-    }
-  } else if (e.key === "ArrowUp") {
-    if (result > 0) {
-      result--;
-      articleContainerMenu[result].focus();
-    }
+  if (isExpanded) {
+    closeSetup();
+  } else {
+    openSetup();
   }
-});
+}
 
-// open guide
+function openSetup() {
+  setUpBtn.ariaExpanded = "true";
+  articleGeneralContainer.ariaHidden = "false";
 
-// const storeContainer = document.querySelector(".store-wrapper");
+  articleGeneralContainer.classList.remove("hide");
+  closeGuide.classList.remove("invisible");
+  openGuide.classList.add("invisible");
+}
 
-openGuide.addEventListener("click", () => {
-  const articles = document.querySelectorAll(".article-container");
-  articles.forEach((article) => {
-    openGuide.classList.add("invisible");
-    closeGuide.classList.remove("invisible");
-    article.style.display = "none";
-  });
-});
+function closeSetup() {
+  setUpBtn.ariaExpanded = "false";
+  articleGeneralContainer.ariaHidden = "true";
 
-document.addEventListener("keydown", function (event) {
-  const articles = document.querySelectorAll(".article-container");
-  const customize_theme = document.querySelector(".customize-theme");
+  articleGeneralContainer.classList.add("hide");
+  closeGuide.classList.add("invisible");
+  openGuide.classList.remove("invisible");
+}
 
-  let currentIndex = 0;
+// update progress bar
 
-  function keypress(event) {
-    if (event.key === "enter") {
-      const checkbox = articles[currentIndex].customize_theme;
-      checkbox.checked = !checkbox.checked;
-    } else if (event.key === "ArrowUp" && currentIndex > 0) {
-      currentIndex--;
-      articles[currentIndex].focus();
-    } else if (
-      event.key === "ArrowDown" &&
-      currentIndex < articles.length - 1
-    ) {
-      currentIndex++;
-      articles[currentIndex].focus();
-    }
-  }
-  articles.forEach((article) => {
-    article.addEventListener("focus", function () {
-      // currentIndex = index;
-    });
-  });
-  console.log(keypress);
-});
+let progressCount = 0;
 
-// dispay article / checkbox checked
+const totalCheckBox = 5;
+
+const progressCounter = document.querySelector(".progress-counter");
+
+console.log(progressCounter);
+const progressBar = document.querySelector(".progress");
+
+console.log(progressBar);
+const mark_as_done_class = "checkbox-done";
+
+// console.log(mark_as_done_class);
+
+function updateprogressBar() {
+  const progressCount = document.querySelectorAll(
+    `.checkbox-btn.${mark_as_done_class}`
+  ).length;
+  console.log(progressCount);
+
+  progressCounter.textContent = progressCount;
+  progressBar.style.width = `${(progressCount / totalCheckBox) * 100}%`;
+}
 
 const articles = document.querySelectorAll(".article-container");
-const progressCounter = document.querySelector(".progress-counter");
-const progressBar = document.querySelector(".progress");
-const checkBoxStatus = document.querySelector("#checkbox-mode");
 
-const checkboxButton = "";
-
-articles.forEach((article) => {
-  const firstSvg = article.querySelector(".first-svg");
-  const secondSvg = article.querySelector(".second-svg");
-  const thirdSvg = article.querySelector(".third-svg");
-  const checkbox = article.querySelector(".customize-theme");
-  const displayContent = article.querySelector(
-    ".article-container .article-flex-container"
-  );
-
-  checkbox.addEventListener("change", function () {
-    if (checkbox.checked) {
-      firstSvg.style.display = "none";
-      secondSvg.style.display = "block";
-      secondSvg.classList.add("rotate-second-svg");
-      article.classList.add("containerBg");
-      displayContent.style.display = "flex";
-
-      // checkBoxStatus.ariaLabel = "In Proggress. Please wait...";
-      checkBoxStatus.setAttribute("aria-label", "In Proggress. Please wait...");
-
-      setTimeout(() => {
-        secondSvg.style.display = "none";
-        thirdSvg.style.display = "block";
-
-        // checkboxButton.ariaLabel = checkbox.ariaLabel.replace(
-        //     "checked",
-        //     "notChecked"
-        //   );
-        // }, 1000);
-        checkboxButton
-          .setAttribute("aria-abel")
-          .replace("checked", "notChecked");
-      }, 1000);
-
-      checkBoxStatus.ariaLabel = "Successfully checkbox checked";
-    } else {
-      secondSvg.style.display = "block";
-      thirdSvg.style.display = "none";
-      article.classList.remove("containerBg");
-      displayContent.style.display = "none";
-
-      // checkBoxStatus.ariaLabel = "In Proggress. Please wait...";
-      checkBoxStatus.setAttribute("aria-label", "In Proggress. Please wait...");
-
-      setTimeout(() => {
-        secondSvg.style.display = "none";
-        firstSvg.style.display = "block";
-
-        //     checkboxButton.ariaLabel = checkbox.ariaabel.replace(
-        //       "notChecked",
-        //       "checked"
-        //     );
-        //   }, 1000);
-        // }
-        // checkBoxStatus.ariaLabel = "Successfully checkbox notChecked";
-        checkboxButton
-          .setAttribute("aria-label")
-          .replace("notChecked", "checked");
-      }, 1000);
-    }
-    checkBoxStatus.setAttribute(
-      "ariaLabel",
-      "Successfully checkbox notChecked"
-    );
-
-    // close previously checked container
-
-    articles.forEach(function (item) {
-      if (item !== article) {
-        const previouslyChecked = item.querySelector(
-          ".article-container .article-flex-container"
-        );
-        previouslyChecked.style.display = "none";
-        item.classList.remove("containerBg");
-      }
+articles.forEach(function (article) {
+  const allCheckboxesBtn = article.querySelectorAll(".checkbox-btn");
+  allCheckboxesBtn.forEach(function (checkboxBtn) {
+    checkboxBtn.addEventListener("click", function () {
+      handle_mark_done_or_not_done(checkboxBtn);
     });
+  });
+});
 
-    // progress bar
+function handle_mark_as_done(btn) {
+  const checkBoxStatus = btn.parentElement.querySelector(".checkbox-mode");
+  const not_completed_icon = btn.parentElement.querySelector(
+    ".not_completed_icon"
+  );
+  const loading_spinner_icon = btn.parentElement.querySelector(
+    ".loading_spinner_icon"
+  );
+  const completed_icon = btn.parentElement.querySelector(".completed_icon");
 
-    const progressBar = document.querySelector(".progress");
-    updateProgressBar();
-    function updateProgressBar() {
-      const checkedCheckboxes = document.querySelectorAll(
-        ".customize-theme:checked"
-      ).length;
-      const allCheckboxes =
-        document.querySelectorAll(".customize-theme").length;
-      const overallProgress = (checkedCheckboxes / allCheckboxes) * 100;
-      progressBar.style.width = overallProgress + "%";
+  not_completed_icon.classList.add("hidden");
+  loading_spinner_icon.classList.remove("hidden");
 
-      progressCounter.textContent = `${checkedCheckboxes} / ${allCheckboxes} completed`;
-    }
+  setTimeout(() => {
+    loading_spinner_icon.classList.add("hidden");
+    completed_icon.classList.remove("hidden");
+
+    btn.ariaLabel = btn.ariaLabel.replace("as done", "as not done");
+
+    // checkBoxStatus.textContent = "Successfully marked as done";
+    btn.classList.add(mark_as_done_class);
+
+    updateprogressBar();
+  }, 3000);
+}
+
+function handle_mark_as_not_done(btn) {
+  const checkBoxStatus = btn.parentElement.querySelector(".checkbox-mode");
+  const not_completed_icon = btn.parentElement.querySelector(
+    ".not_completed_icon"
+  );
+  const loading_spinner_icon = btn.parentElement.querySelector(
+    ".loading_spinner_icon"
+  );
+  const completed_icon = btn.parentElement.querySelector(".completed_icon");
+
+  completed_icon.classList.add("hidden");
+  loading_spinner_icon.classList.remove("hidden");
+
+  setTimeout(() => {
+    loading_spinner_icon.classList.add("hidden");
+    not_completed_icon.classList.remove("hidden");
+
+    btn.ariaLabel = btn.ariaLabel.replace("as not done", "as done");
+
+    // checkBoxStatus.textContent = "Successfully marked as not done";
+    btn.classList.remove(mark_as_done_class);
+
+    updateprogressBar();
+  }, 3000);
+}
+
+function handle_mark_done_or_not_done(btn) {
+  const markAsDone = btn.classList.contains(mark_as_done_class);
+  console.log(markAsDone);
+
+  if (markAsDone) {
+    handle_mark_as_not_done(btn);
+  } else {
+    handle_mark_as_done(btn);
+  }
+}
+
+const setUpGuideBtn = document.querySelector("#container-button");
+const openGuideBtn = document.querySelector(".open-guide");
+const setup_heading = document.querySelector(".article-heading");
+const checkedBoxBtns = document.querySelectorAll(".checkbox-btn");
+
+setUpGuideBtn.onclick = function () {
+  console.log("clicked setUpGuideBtn");
+  setup_heading.click();
+};
+
+checkedBoxBtns.forEach(function (checkboxBtn) {
+  checkboxBtn.addEventListener("click", function () {
+    setTimeout(() => {
+      checkedBoxBtns.forEach(function (btn, index) {
+        if (btn.classList.contains(mark_as_done_class)) {
+          let nextItem = btn.closest("article");
+
+          nextItem.nextElementSibling.querySelector(".article-heading").click();
+          nextItem.nextElementSibling.querySelector(".checkbox-btn").focus();
+        }
+      });
+    }, 3000);
   });
 });
 
@@ -428,6 +389,7 @@ articleContainer.forEach(function (article) {
       articleFlexContainer.style.display = "flex";
       article.classList.add("containerBg");
     }
+
     //close previously clicked heading
 
     articles.forEach(function (item) {
@@ -441,39 +403,3 @@ articleContainer.forEach(function (article) {
     });
   });
 });
-
-// import React from "react";
-// import ReactDOM from "react-dom";
-
-// const roolElement = document.getElementById("root");
-
-// let counter = 0;
-// const handleClickEvent = () =>{
-//   counter++;
-//   console.log("counter", counter)
-//   renderContent();
-// };
-
-// const content = () =>{
-//   <div>
-//     <button onClick={counter}>Clish to increase the number</button>
-//     <p>The counter is on {counter}</p>
-//   </div>
-
-// };
-
-// ReactDOM.render(content, roolElement);
-
-// const renderContent = () =>{
-//   const content = () =>{
-//     <div>
-//       <button onClick={counter}>Clish to increase the number</button>
-//       <p>The counter is on {counter}</p>
-//     </div>
-
-//   };
-
-//   ReactDOM.render(content, roolElement);
-
-// }
-// renderContent()
